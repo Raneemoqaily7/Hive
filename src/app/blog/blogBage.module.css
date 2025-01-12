@@ -1,0 +1,13 @@
+.title{
+    background-color: antiquewhite;
+    color: white;
+    padding:5px 10px;
+    text-align: end;
+
+}
+
+
+.content{
+    display:flex;
+    gap:50px;
+}
