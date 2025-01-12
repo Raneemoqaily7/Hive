@@ -1,0 +1,27 @@
+.loadingContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full screen height */
+    background-color: #f9f9f9; /* Subtle background */
+  }
+  
+  .spinner {
+    width: 80px;
+    height: 80px;
+    border: 8px solid #e0e0e0; /* Light gray background of spinner */
+    border-top: 8px solid #1a8917; /* Green spinner color */
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+  }
+  
+  /* Spinner animation */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

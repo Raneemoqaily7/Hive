@@ -7,7 +7,7 @@ import Footer from "@/components/footer/Footer";
 import {ThemeContextProvider} from "@/themeContext/ThemeContext"
 import ThemeProviders from "@/providers/ThemeProviders";
 
-
+import AuthProvider from '@/providers/AuthProvider'
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -28,6 +28,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+      <AuthProvider>
       <ThemeContextProvider>
        <ThemeProviders>
         <div className="container">
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
         </div>
        </ThemeProviders>
         </ThemeContextProvider>
+        </AuthProvider>
       </body>
     </html>
   );
