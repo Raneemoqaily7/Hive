@@ -38,6 +38,15 @@
     color: var(--softTextColor)
 }
 
+.toggleButton {
+    padding: 16px 20px;
+    border: none;
+    border-radius: 5px;
+    width: max-content;
+    cursor: pointer;
+  }
+  
+
 .link{
     border-bottom: 1px solid crimson;
     width: max-content;

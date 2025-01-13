@@ -13,15 +13,15 @@ const WritePage = () => {
     const [value, setValue] = useState("");
     const [open, setOpen] = useState(false);
     const { status } = useSession;
-  const router = useRouter;
+    const router = useRouter;
 
     if (status === "loading") {
-        return <div className={styles.loading}>Loading...</div>;
-      }
-    
-      if (status === "unauthenticated") {
+        return <Loading />
+    }
+
+    if (status === "authenticated") {
         router.push("/");
-      }
+    }
     return (
         <div className={styles.container}>
             <input type="text" placeholder="Title" className={styles.input} />
@@ -43,15 +43,15 @@ const WritePage = () => {
                     </div>
                 )}
 
-<textarea
-    className={styles.textArea}
-    value={value}
-    onChange={(e) => {
-        setValue(e.target.value); // Update state
-        console.log("Current Value:", e.target.value); // Log the value
-    }}
-    placeholder="Tell your thoughts..."
-/>
+                <textarea
+                    className={styles.textArea}
+                    value={value}
+                    onChange={(e) => {
+                        setValue(e.target.value); // Update state
+                        console.log("Current Value:", e.target.value); // Log the value
+                    }}
+                    placeholder="Tell your thoughts..."
+                />
 
             </div>
             <button className={styles.publish}>Publish</button>

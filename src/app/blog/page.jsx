@@ -4,11 +4,12 @@ import CardList from "../../components/cardList/CardList";
 import Menu from "../../components/Menu/Menu";
 
 
-const BlogPage = () => {
+const BlogPage = ({searchParams}) => {
+    // const {cat} = searchParams;
     return (
         <div className={styles.container}>
 
-            <h2 className={styles.title}>Style Blog</h2>
+            <h2 className={styles.title}>Blog</h2>
             <div className={styles.content}>
                 <CardList />
                 <Menu />

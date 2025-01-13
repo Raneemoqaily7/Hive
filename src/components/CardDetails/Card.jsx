@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./card.module.css";
 import Image from "next/image";
 import Link from "next/link";
-const Card =()=>{
+const Card =({key, item})=>{
     return (
-        <div className={styles.container}>
+        <div className={styles.container} key={key}>
 
 <div className={styles.imageContainer}>
             <Image src="/p1.jpg" alt="blog" fill className={styles.image}/>
@@ -12,15 +12,16 @@ const Card =()=>{
             <div className={styles.textContainer}>
 
                 <div className={styles.detail}>
-                    <span className={styles.date}> 11.02.2023 - </span>
-                    <span className={styles.category}> Culture</span>
+                <span className={styles.date}>{new Date(item.createdAt).toISOString().split("T")[0]} - </span>
+
+                    <span className={styles.category}> {item.catSlug}</span>
                 </div>
                 <Link href="/">
-                <h1> Blog1</h1>
+                <h1> {item.title}</h1>
                 
                 </Link>
                 <p className={styles.desc}>
-                Dive into a world of engaging content where creativity meets insight.Our blog covers a diverse range of topics including technology, lifestyle, personal growth, health, and much more. Whether you're here to learn something new, find inspiration, or simply enjoy a good read, we've got you covered!
+                {item.desc}
                 </p>
                 <Link href="/" className={styles.link}> Read More</Link>
             </div>
