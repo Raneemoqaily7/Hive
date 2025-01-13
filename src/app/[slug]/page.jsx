@@ -42,7 +42,7 @@ const SinglePage = () => {
                         <Comment/>
                     </div>
                 </div>
-                <Menu />
+                {/* <Menu /> */}
 
             </div>
         </div>

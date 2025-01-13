@@ -88,7 +88,7 @@ const SinglePage = ({ params: paramsPromise }) => {
             <Comments postSlug={slug} />
           </div>
         </div>
-        <Menu />
+        {/* <Menu /> */}
       </div>
     </div>
   );
