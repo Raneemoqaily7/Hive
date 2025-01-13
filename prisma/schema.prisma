@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url= "mongodb+srv://BlogHive:BlogHive@cluster0.h3qmc.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster0"
 }
 
 model Account {
@@ -40,18 +40,22 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-model User {
+
+ model User {
   id            String    @id @default(cuid()) @map("_id")
   name          String?
   email         String    @unique
   emailVerified DateTime?
   image         String?
+  password      String?  
   accounts      Account[]
   sessions      Session[]
-   Blog          Blog[]
+  Blog          Blog[]
   Comment       Comment[]
-
+     
 }
+
+
 
 model VerificationToken {
   identifier String   @id @map("_id")

@@ -1,11 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import styles from "./writePage.module.css";
 import { useEffect, useState, useRef } from "react";
+import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Loading from "@/components/loading/Loading";
+import Loading from "../loading/Loading";
+const ReactQuill = dynamic(() => import("react-quill"), {
+  ssr: false,
+  loading: () => <p>Loading editor...</p>,
+});
 
 const WritePage = () => {
   const { status } = useSession();
@@ -48,7 +54,7 @@ const WritePage = () => {
 
   useEffect(() => {
     if (slug) {
-      router.push(`/blogs/${slug}`);
+      router.push(`/posts/${slug}`);
     }
   }, [slug, router]);
 
@@ -88,20 +94,20 @@ const WritePage = () => {
     setErrorMessage("");
 
     try {
-      const res = await fetch("/api/blogs", {
+      const res = await fetch("/api/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           title,
-          desc: value.trim(),
+          desc: value,
           img: media,
           slug: slugify(title),
           catSlug: catSlug || "style",
         }),
       });
-      console.log(res, "resssss")
+
       if (res.ok) {
         const data = await res.json();
         setSlug(data.slug);
@@ -126,7 +132,19 @@ const WritePage = () => {
       setIsSubmitting(false);
     }
   };
+  const QuillWrapper = ({ value, onChange }) => {
+    if (typeof window === "undefined") return null;
 
+    return (
+      <ReactQuill
+        className={styles.textArea}
+        theme="bubble"
+        value={value}
+        onChange={onChange}
+        placeholder="Tell your story..."
+      />
+    );
+  };
   return (
     <div className={styles.container}>
       <input
@@ -138,17 +156,24 @@ const WritePage = () => {
       />
       <select
         className={styles.select}
-        onChange={(e) => setCatSlug(e.target.value)}
-      >
+        onChange={(e) => setCatSlug(e.target.value)}>
         <option value="style">style</option>
         <option value="fashion">fashion</option>
         <option value="food">food</option>
         <option value="culture">culture</option>
-       
+        <option value="travel">travel</option>
+        <option value="coding">coding</option>
       </select>
       <div className={styles.editor}>
-        <button className={styles.button} onClick={handleFileBrowse}>
-          <Image src="/plus.png" alt="Add Media" width={16} height={16} />
+        <button
+          className={styles.button}
+          onClick={handleFileBrowse}>
+          <Image
+            src="/plus.png"
+            alt="Add Media"
+            width={16}
+            height={16}
+          />
         </button>
         <input
           type="file"
@@ -169,18 +194,15 @@ const WritePage = () => {
             />
           </div>
         )}
-        <textarea
-          className={styles.textArea}
+        <QuillWrapper
           value={value}
-          onChange={(e) => setValue(e.target.value)}
-          placeholder="Tell your story..."
+          onChange={setValue}
         />
       </div>
       <button
         className={styles.publish}
         onClick={handleSubmit}
-        disabled={isSubmitting}
-      >
+        disabled={isSubmitting}>
         {isSubmitting ? "Publishing..." : "Publish"}
       </button>
       {errorMessage && (
@@ -189,7 +211,6 @@ const WritePage = () => {
     </div>
   );
 };
-
 WritePage.displayName = "WritePage";
 
 export default WritePage;

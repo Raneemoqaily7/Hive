@@ -22,7 +22,7 @@ const CardList = async ({ cat }) => {
       <h1 className={styles.title}>Recent Blogs</h1>
       <div className={styles.blogs}>
         {data?.map((item) => (
-          <Card item={item} key={item.id} />
+          <Card item={item} key={item._id} />
         ))}
       </div>
     </div>
