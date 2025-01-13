@@ -94,8 +94,10 @@ model Comment {
   id        String   @id @default(cuid()) @map("_id")
   createdAt DateTime @default(now())
   desc      String
+  
   userEmail String
   user      User     @relation(fields: [userEmail], references: [email])
-  blogSlug  String
-  blog      Blog     @relation(fields: [blogSlug], references: [slug])
+  postSlug  String
+  blog      Blog     @relation(fields: [postSlug], references: [slug])
+  
 }

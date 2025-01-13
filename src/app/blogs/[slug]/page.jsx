@@ -25,7 +25,7 @@ const SinglePage = ({ params: paramsPromise }) => {
 
   // Initialize useSWR even if slug is undefined initially
   const { data, error, isLoading } = useSWR(
-    slug ? `/api/blogs/${slug}` : null, // Ensure no request is made if slug is undefined
+    slug ? `/api/blogs/${slug}` : null,
     fetcher
   );
 
@@ -52,8 +52,9 @@ const SinglePage = ({ params: paramsPromise }) => {
                     />
                   </div>
                 )}
+                 <span className={styles.username}>{data?.user?.name}</span>
                 <div className={styles.userTextContainer}>
-                  <span className={styles.username}>{data?.user?.name}</span>
+                 
                   <span className={styles.date}>
                     {handleTime(data.createdAt)}
                   </span>

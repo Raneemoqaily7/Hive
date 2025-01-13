@@ -32,6 +32,13 @@
 
 }
 
+.writer{
+    color:gray;
+    font-weight:500;
+    font-size: smaller;
+
+}
+
 .desc{
     font-size: 18px;
     font-weight: 300;
@@ -52,7 +59,42 @@
     width: max-content;
     padding: 2px 0px;
 }
+.editButton {
+    background-color: transparent;
+    border: 1px solid #0070f3;
+    color: #0070f3;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none; /* Remove default link styles */
+  }
+  
+  .editButton:hover {
+    background-color: #0070f3;
+    color: white;
+  }
 
+.button{
+    border: none;
+}
+
+.deleteButton {
+    background-color: transparent;
+    border: 1px solid red;
+    color: red;
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
+  
+  .deleteButton:hover {
+    background-color: red;
+    color: white;
+  }
+  
 @media screen and (max-width: 1280px) {
     .imageContainer {
       display: none;

@@ -1,65 +1,91 @@
-import Link from "next/link";
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import useSWR from "swr";
 import styles from "./comments.module.css";
+import Image from "next/image";
+import { useSession } from "next-auth/react";
+import handleTime from "@/utils/time";
+import Loading from "../loading/Loading";
 
+const fetcher = (url) => fetch(url).then((res) => res.json());
 
-const Comment = () => {
-    const status = "authenticated";
-    return (
-        <div className={styles.container}>
-            <h1 className={styles.title}>comments</h1>
-            {status === "authenticated" ? (
-                <div className={styles.write}>
-                    <textarea placeholder="write your comment" className={styles.input} />
-                    <button className={styles.button}> Send</button>
-                </div>) : (
-                <Link href="/login"></Link>
-            )
-            }
-            <div className={styles.comments}>
+const Comments = ({ postSlug }) => {
+  const { status } = useSession();
+  const { data, mutate, isLoading } = useSWR(
+    `/api/comments?postSlug=${postSlug}`,
+    fetcher
+  );
+  const [desc, setDesc] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState("");
 
-                <div className={styles.comment}></div>
-                <div className={styles.user}>
-                    <Image src="/p1.jpg" alt="user image" width={50} height={50} className={styles.image} />
-                    <div className={styles.userInfo}>
-                        <span className={styles.username}>Raneem Oqaily</span>
-                        <span className={styles.date}> 01.01.2020</span>
-                    </div>
-                </div>
-                <p className={styles.desc}> lerm loerm lerm loerm v vlerm loerm lerm loerm lerm loerm lerm loermlerm loerm lerm loerm lerm loerm lerm loerm lerm loerm lerm loerm</p>
-            </div>
+  const handleSubmit = async () => {
+    if (!desc.trim()) return;
+    await fetch("/api/comments", {
+      method: "POST",
+      body: JSON.stringify({ desc, postSlug }),
+      headers: { "Content-Type": "application/json" },
+    });
 
-            <div className={styles.comments}>
+    setDesc("");
+    setFeedbackMessage("Comment submitted successfully!");
+    mutate();
+    setTimeout(() => setFeedbackMessage(""), 3000);
+  };
 
-                <div className={styles.comment}></div>
-                <div className={styles.user}>
-                    <Image src="/p1.jpg" alt="user image" width={50} height={50} className={styles.image} />
-                    <div className={styles.userInfo}>
-                        <span className={styles.username}>Raneem Oqaily</span>
-                        <span className={styles.date}> 01.01.2020</span>
-                    </div>
-                </div>
-                <p className={styles.desc}> lerm loerm lerm loerm v vlerm loerm lerm loerm lerm loerm lerm loermlerm loerm lerm loerm lerm loerm lerm loerm lerm loerm lerm loerm</p>
-            </div>
-
-
-            <div className={styles.comments}>
-
-                <div className={styles.comment}></div>
-                <div className={styles.user}>
-                    <Image src="/p1.jpg" alt="user image" width={50} height={50} className={styles.image} />
-                    <div className={styles.userInfo}>
-                        <span className={styles.username}>Raneem Oqaily</span>
-                        <span className={styles.date}> 01.01.2020</span>
-                    </div>
-                </div>
-                <p className={styles.desc}> lerm loerm lerm loerm v vlerm loerm lerm loerm lerm loerm lerm loermlerm loerm lerm loerm lerm loerm lerm loerm lerm loerm lerm loerm</p>
-            </div>
-
-
+  return (
+    <div className={styles.container}>
+      {status === "authenticated" ? (
+        <div className={styles.write}>
+          <div className={styles.inputContainer}>
+            <textarea
+              placeholder="Write a comment..."
+              className={styles.input}
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+            />
+          </div>
+          <button
+            className={styles.button}
+            onClick={handleSubmit}>
+            Send
+          </button>
         </div>
-    );
-
+      ) : null}
+      {feedbackMessage && (
+        <div className={styles.feedback}>{feedbackMessage}</div>
+      )}
+      <div className={styles.comments}>
+        {isLoading ? (
+          <Loading />
+        ) : status === "authenticated" ? (
+          data?.map((item) => (
+            <div
+              key={item.id}
+              className={styles.comment}>
+              <div className={styles.user}>
+                {item?.user?.image && (
+                  <Image
+                    src={item.user.image}
+                    alt="User profile"
+                    width={50}
+                    height={50}
+                    className={styles.image}
+                  />
+                )}
+                <div className={styles.userInfo}>
+                  <span className={styles.username}>{item.user.name}</span>
+                  <span className={styles.date}>
+                    {handleTime(item.createdAt)}
+                  </span>
+                </div>
+              </div>
+              <p className={styles.desc}>{item.desc}</p>
+            </div>
+          ))
+        ) : null}
+      </div>
+    </div>
+  );
 };
 
-export default Comment;
+export default Comments;
