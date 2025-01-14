@@ -1,0 +1,59 @@
+/* Main container styling */
+.container {
+  background-color: #1c1c1c; /* Light black background */
+  color: #ffd700; /* Golden yellow text */
+  font-family: "Arial", sans-serif;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3); /* Yellow glow shadow */
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+/* Title styling */
+.title {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 5px rgba(255, 215, 0, 0.5); /* Subtle glowing text */
+}
+
+/* Description styling */
+.description {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* Section styling */
+.section {
+  margin-bottom: 30px;
+}
+
+/* Heading styling */
+.heading {
+  font-size: 24px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ffd700; /* Yellow underline */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* List styling */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Text styling for paragraphs */
+.text {
+  font-size: 18px;
+  line-height: 1.6;
+}

@@ -18,16 +18,21 @@ const SinglePage = ({ params: paramsPromise }) => {
   const { status } = useSession();
   const slug = params?.slug;
 
-  // Resolve params once at the start
+ 
   useEffect(() => {
     paramsPromise.then((resolvedParams) => setParams(resolvedParams));
   }, [paramsPromise]);
 
-  // Initialize useSWR even if slug is undefined initially
+  
   const { data, error, isLoading } = useSWR(
     slug ? `/api/blogs/${slug}` : null,
     fetcher
+   
   );
+  
+ 
+ 
+
 
   if (!params) return <Loading />;
   if (isLoading) return <Loading />;
@@ -88,7 +93,7 @@ const SinglePage = ({ params: paramsPromise }) => {
             <Comments postSlug={slug} />
           </div>
         </div>
-        {/* <Menu /> */}
+       
       </div>
     </div>
   );

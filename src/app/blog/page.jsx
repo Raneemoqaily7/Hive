@@ -5,12 +5,12 @@ import Menu from "../../components/Menu/Menu";
 
 
 const BlogPage = ({ searchParams }) => {
-    const cat = searchParams.cat; // Extract 'cat' from the query
+    const cat = searchParams.cat; 
   
     return (
       <div className={styles.container}>
         <h2 className={styles.title}>{cat ? `${cat} Blogs` : "All Blogs"}</h2>
-        <CardList cat={cat} /> {/* Pass 'cat' to CardList */}
+        <CardList cat={cat} /> 
       </div>
     );
   };

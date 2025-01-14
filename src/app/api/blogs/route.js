@@ -9,13 +9,13 @@ export const GET = async (req) => {
   
     const query = {
       where: {
-        ...(cat && { catSlug: cat }), // Filter by category slug if provided
+        ...(cat && { catSlug: cat }), 
       },
       include: {
-        user: { // Include the user who created the blog
+        user: {
           select: {
-            name: true, // Only include the user's name
-            email: true, // Optionally include email
+            name: true, 
+            email: true, 
           },
         },
       },

@@ -59,7 +59,7 @@ export const POST = async (req) => {
   } catch (error) {
     console.error("Signup error:", error);
 
-    // Ensure that error.message is defined
+    
     const errorMessage = error.message || "An unknown error occurred";
 
     return new NextResponse(

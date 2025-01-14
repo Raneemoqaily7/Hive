@@ -31,11 +31,11 @@ export const PATCH = async (req) => {
       );
     }
 
-    // Update comment (replace with specific functionality if needed)
+    
     const updatedComment = await prisma.comment.update({
       where: { id: commentId },
       data: {
-        desc: "Updated content", // Example update (replace with actual logic)
+        desc: "Updated content", 
       },
     });
 

@@ -1,0 +1,67 @@
+
+.container {
+    background-color: #1c1c1c;
+    color: #ffd700;
+    font-family: "Arial", sans-serif;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+    max-width: 800px;
+    margin: 50px auto;
+  }
+  
+ 
+  .title {
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+  }
+  
+ 
+  .description {
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+  
+
+  .infoSection {
+    margin-bottom: 30px;
+  }
+  
+ 
+  .heading {
+    font-size: 24px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ffd700; 
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+  
+ 
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .listItem {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+ 
+  .listLink {
+    color: #ffd700;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  
+  .listLink:hover {
+    color: #fff;
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.5); 
+  }
+  

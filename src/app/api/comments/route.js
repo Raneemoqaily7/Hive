@@ -18,7 +18,7 @@ export const GET = async (req) => {
   console.log(session,"session")
 
   try {
-    // Fetch comments with user data
+    
     const comments = await prisma.comment.findMany({
       where: {
         ...(postSlug && { postSlug }),
@@ -27,7 +27,7 @@ export const GET = async (req) => {
     });
     console.log(comments,"commmnets")
 
-    // Map comments to remove likes-related fields
+   
     const simplifiedComments = comments.map((comment) => ({
       id: comment.id,
       createdAt: comment.createdAt,

@@ -1,14 +1,27 @@
-.container{
-    flex:5;
-
+.container {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align content */
+  margin: 0 auto; /* Center container */
+  padding: 20px;
 }
-.title{
-    margin: 50px;
-   
+
+.title {
+  margin: 50px;
+  text-align: center; /* Center-align the title */
+  font-size: 32px;
+}
+
+.blogs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid layout */
+  gap: 20px; /* Spacing between cards */
+  width: 100%; /* Ensure it takes full width */
 }
 
 @media screen and (max-width: 1280px) {
-    .title {
-      font-size: 25px;
-    }
+  .title {
+    font-size: 25px;
   }
+}

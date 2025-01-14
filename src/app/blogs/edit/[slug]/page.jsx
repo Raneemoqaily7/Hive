@@ -14,7 +14,7 @@ const EditBlog = ({ params: paramsPromise }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
-  // Resolve `params` promise
+  
   useEffect(() => {
     paramsPromise.then((resolvedParams) => setParams(resolvedParams));
   }, [paramsPromise]);
@@ -22,7 +22,7 @@ const EditBlog = ({ params: paramsPromise }) => {
   useEffect(() => {
     if (!params) return;
 
-    // Fetch the blog details by slug
+    
     const fetchBlog = async () => {
       try {
         const res = await fetch(`/api/blogs/${params.slug}`);

@@ -20,6 +20,7 @@ const CardList = async ({ cat }) => {
   console.log(data,"dataaaaaaa")
   return (
     <div className={styles.container}>
+     
       <h1 className={styles.title}>Recent Blogs</h1>
       <div className={styles.blogs}>
         {data?.posts?.map((item) => (
