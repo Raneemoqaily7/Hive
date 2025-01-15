@@ -3,10 +3,10 @@ import styles from "./cardList.module.css";
 import Card from "../CardDetails/Card";
 
 const getData = async (cat) => {
-  const res = await fetch(`http://localhost:3000/api/blogs?cat=${encodeURIComponent(cat || "")}`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/blogs?cat=${encodeURIComponent(cat || "")}`, {
     cache: "no-store",
   });
-
+console.log(res,"ressss")
   if (!res.ok) {
     throw new Error("Failed to fetch posts");
   }
