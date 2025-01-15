@@ -4,8 +4,8 @@ import CardList from "../../components/cardList/CardList";
 import Menu from "../../components/Menu/Menu";
 
 
-const BlogPage = ({ searchParams }) => {
-    const cat = searchParams.cat; 
+const BlogPage =  ({ searchParams }) => {
+    const  cat =  searchParams.cat; 
   
     return (
       <div className={styles.container}>

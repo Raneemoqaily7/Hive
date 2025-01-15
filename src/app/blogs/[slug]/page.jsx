@@ -29,6 +29,7 @@ const SinglePage = ({ params: paramsPromise }) => {
     fetcher
    
   );
+  console.log(data,"yyyyy")
   
  
  
