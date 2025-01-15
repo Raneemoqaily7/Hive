@@ -1,77 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mongodb"
-  url      = "mongodb+srv://BlogHive:BlogHive@cluster0.h3qmc.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster0"
+  url= "mongodb+srv://BlogHive:BlogHive@cluster0.h3qmc.mongodb.net/blog?retryWrites=true&w=majority&appName=Cluster0"
 }
 
 model Account {
-  id                String @id @map("_id")
-  access_token      String
-  expires_at        BigInt
-  id_token          String
+  id                String  @id @default(cuid()) @map("_id")
+  userId            String
+  type              String
   provider          String
   providerAccountId String
-  scope             String
-  token_type        String
-  type              String
-  userId            String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
 
-model Blog {
-  id        String   @id @map("_id")
-  catSlug   String
-  createdAt DateTime @db.Date
-  desc      String
-  img       String?
-  slug      String   @unique
-  title     String
-  userEmail String
-  views     BigInt
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+
+ model User {
+  id            String    @id @default(cuid()) @map("_id")
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?  
+  accounts      Account[]
+  sessions      Session[]
+  Blog          Blog[]
+  Comment       Comment[]
+     
+}
+
+
+
+model VerificationToken {
+  identifier String   @id @map("_id")
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+
+
 model Category {
-  id    String @id @map("_id")
-  img   String
-  slug  String @unique
+  id    String  @id @default(cuid()) @map("_id")
+  slug  String  @unique
   title String
+  img   String?
+  Blogs Blog[]
+}
+
+model Blog {
+  id        String    @id @default(cuid()) @map("_id")
+  createdAt DateTime  @default(now())
+  slug      String    @unique
+  title     String
+  desc      String
+  img       String?
+  views     Int       @default(0)
+  catSlug   String
+  cat       Category  @relation(fields: [catSlug], references: [slug])
+  userEmail String
+  user      User      @relation(fields: [userEmail], references: [email])
+  comments  Comment[]
 }
 
 model Comment {
-  id        String   @id @map("_id")
-  createdAt DateTime @db.Date
+  id        String   @id @default(cuid()) @map("_id")
+  createdAt DateTime @default(now())
   desc      String
-  postSlug  String
+  
   userEmail String
-}
-
-model Session {
-  id           String   @id @map("_id")
-  expires      DateTime @db.Date
-  sessionToken String   @unique
-  userId       String
-}
-
-model User {
-  id            String  @id @map("_id")
-  email         String  @unique
-  /// Could not determine type: the field only had null or empty values in the sample set.
-  emailVerified Json?
-  image         String
-  name          String
-  password      String?
-}
-
-model VerificationToken {
-  /// Field referred in an index, but found no data to define the type.
-  id    Json?  @id @map("_id")
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  /// Field referred in an index, but found no data to define the type.
-  token Json?  @unique
-
-  @@unique([id, token])
+  user      User     @relation(fields: [userEmail], references: [email])
+  postSlug  String
+  blog      Blog     @relation(fields: [postSlug], references: [slug])
+  
 }
