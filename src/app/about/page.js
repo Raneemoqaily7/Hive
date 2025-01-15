@@ -5,7 +5,7 @@ export default function About() {
     <div className={styles.container}>
       <h1 className={styles.title}>About BlogHive</h1>
       <p className={styles.description}>
-        Welcome to <strong>BlogHive</strong>, your ultimate platform for sharing and discovering ideas, stories, and knowledge.
+        Welcome to <strong>BlogHive</strong>, your ultimate platform for sharing and discovering ideas, stories, and knowledge
       </p>
       <p className={styles.description}>
         At BlogHive, we aim to empower individuals to express themselves through blogs, connect with like-minded readers, and foster a community of creativity and inspiration.
