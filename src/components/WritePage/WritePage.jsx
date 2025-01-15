@@ -11,7 +11,7 @@ import Loading from "../loading/Loading";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
-  loading: () => <p>Loading editor...</p>,
+  loading: () => <p>Loading editor..</p>,
 });
 
 const WritePage = () => {
