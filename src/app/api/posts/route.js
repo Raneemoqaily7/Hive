@@ -9,9 +9,8 @@ export const GET = async (req) => {
   try {
     const posts = await prisma.Blog.findMany({
       where: cat ? { catSlug: cat } : {}, 
-      
+     
     });
-   
 
     return NextResponse.json(posts, { status: 200 }); 
   } catch (err) {
