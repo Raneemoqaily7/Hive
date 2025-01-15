@@ -90,7 +90,7 @@
   }
   
   .textArea:focus {
-    border-bottom: 2px solid rgba(93, 43, 100, 0.359);
+    border-bottom: 2px solid rgba(107, 50, 114, 0.359);
   }
   
   .publish {
