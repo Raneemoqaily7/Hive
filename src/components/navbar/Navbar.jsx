@@ -15,7 +15,7 @@ const Navbar=()=> {
         <div className={styles.logo}> BlogHive</div>
         <div className={styles.links}> 
             <Toggle/>
-            <Link href="/" className={styles.link}>HomePage </Link>
+            <Link href="/" className={styles.link}>Homepage </Link>
             <Link href="/contact"  className={styles.link}>Contact</Link>
             <Link href="/about"  className={styles.link}>About</Link>
             <Auth/>
