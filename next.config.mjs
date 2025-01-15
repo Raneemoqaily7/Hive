@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-   
+    experimental: {
+        optimizeCss: true, // Enable CSS optimization
+      },
       env: {
         NEXTAUTH_URL: process.env.NEXTAUTH_URL || "http://localhost:3000",
         GOOGLE_ID: process.env.GOOGLE_ID,
