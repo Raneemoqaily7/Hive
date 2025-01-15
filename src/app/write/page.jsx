@@ -20,7 +20,9 @@ const WritePage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [slug, setSlug] = useState("");
   const fileInputRef = useRef(null);
-
+  if (!router.isFallback && !postData && !posts) {
+    return <ErrorPage statusCode={404} />
+}
   const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();

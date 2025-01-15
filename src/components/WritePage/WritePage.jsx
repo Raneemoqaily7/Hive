@@ -8,6 +8,7 @@ import "react-quill/dist/quill.bubble.css";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Loading from "../loading/Loading";
+
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
   loading: () => <p>Loading editor...</p>,
@@ -16,7 +17,9 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 const WritePage = () => {
   const { status } = useSession();
   const router = useRouter();
-
+  if (!router.isFallback && !postData && !posts) {
+    return <ErrorPage statusCode={404} />
+}
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState("");
   const [value, setValue] = useState("");

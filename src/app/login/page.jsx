@@ -11,7 +11,9 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
+  if (!router.isFallback && !postData && !posts) {
+    return <ErrorPage statusCode={404} />
+}
   useEffect(() => {
     if (status === "authenticated") {
        router.push("/");

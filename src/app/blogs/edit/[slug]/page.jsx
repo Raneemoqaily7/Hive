@@ -13,7 +13,9 @@ const EditBlog = ({ params: paramsPromise }) => {
   const [img, setImg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
-
+  if (!router.isFallback && !postData && !posts) {
+    return <ErrorPage statusCode={404} />
+}
   
   useEffect(() => {
     paramsPromise.then((resolvedParams) => setParams(resolvedParams));
